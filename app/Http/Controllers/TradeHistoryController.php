@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\TradeHistory;
+use Illuminate\Support\Facades\DB;
 
 class TradeHistoryController extends Controller
 {
@@ -16,6 +17,16 @@ class TradeHistoryController extends Controller
     {
         //
         return TradeHistory::all();
+    }
+
+    public function currencies()
+    {
+        $return = [];
+        $currencies = DB::table('tradeHistory')->select('pair')->groupBy('pair')->get();
+        foreach($currencies as $c) {
+            $return[] = $c->pair;
+        }
+        return $return;
     }
 
     /**
