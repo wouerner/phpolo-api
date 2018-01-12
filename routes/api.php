@@ -18,4 +18,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('trade-history/currencies', 'TradeHistoryController@currencies');
+Route::get('trade-history/{pair}/{category}/{type}/{from}/{to}', 'TradeHistoryController@show');
 Route::resource('trade-history', 'TradeHistoryController');

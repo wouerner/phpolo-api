@@ -53,12 +53,24 @@ class TradeHistoryController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  string  $pair
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($pair, $category,$type,$from,$to )
     {
-        //
+        /* var_dump($pair, $category,$type,$from,$to);die; */
+        $tradeHistory = DB::table('tradeHistory')
+            ->where('pair', $pair)
+            ->where('category', $category)
+            ->where('type', $type)
+            ->where('date', '>=', $from)
+            ->where('date', '<=', $to)
+            ->get();
+        /* foreach($currencies as $c) { */
+        /*     $return[] = $c->pair; */
+        /* } */
+        /* return ['teste']; */
+        return $tradeHistory;
     }
 
     /**
